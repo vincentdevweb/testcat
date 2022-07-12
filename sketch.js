@@ -61,7 +61,5 @@ function gotResult(error, results) {
   
       createDiv(`la probabilité que la photo soit un chat est de: <br/>` + cost + ` % `);
       createDiv(`la probabilité que la photo soit un chien est de: <br/>` + cost2 + ` %`);
-      createDiv(inputFile2);
-      createDiv(document.getElementById('storage'));
     }
   }
