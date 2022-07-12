@@ -30,7 +30,10 @@ function gotResult(error, results) {
     } else {
       // The results are in an array ordered by confidence.
       console.log(results);
-  
+        
+      cost = 0 ;
+      cost2 = 0 ;
+        
        //Cat else dog Probabilité
       str = String(results[0].label) ;
       if (str.includes(word1)) {
