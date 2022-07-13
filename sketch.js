@@ -1,8 +1,12 @@
 // Initialize the Image Classifier method with MobileNet. A callback needs to be passed.
 var classifier = ml5.imageClassifier('MobileNet');
+var probid = document.getElementById('probid');
+var probid2 = document.getElementById('probid2');
 
 var str = new String;
-const word1 = "cat";
+
+var word1 = "cat";
+
 
 var cost = 0 ; // Cat prob
 var cost2 = 0 ; // dog prob
@@ -30,39 +34,49 @@ function gotResult(error, results) {
     } else {
       // The results are in an array ordered by confidence.
       console.log(results);
-        
+
       cost = 0 ;
       cost2 = 0 ;
-        
+
        //Cat else dog Probabilité
       str = String(results[0].label) ;
       if (str.includes(word1)) {
-        createDiv(`Miaou probable : ${results[0].label}` + ` <br/> Estimation : ${nf(results[0].confidence, 0, 2)*100}%`);
+        probid.style.display = "block" ;
+        probid2.style.display = "none" ;
+        document.getElementById(`name1`).innerText = results[0].label ;
+        document.getElementById(`prob1`).innerText = nf(results[0].confidence, 0, 2)*100 ;
         cost = cost + nf(results[0].confidence, 0, 2)*100 ;
       } else {
-        createDiv(`Whouaf probable : ${results[0].label}` + ` <br/> Estimation : ${nf(results[0].confidence, 0, 2)*100}%`);
+        probid.style.display = "none" ;
+        probid2.style.display = "block" ;
+        document.getElementById(`name4`).innerText = results[0].label ;
+        document.getElementById(`prob4`).innerText = nf(results[0].confidence, 0, 2)*100 ;
         cost2 = cost2 + nf(results[0].confidence, 0, 2)*100 ;
       }
       
       str = String(results[1].label) ;
       if (str.includes(word1)) {
-        createDiv(`Miaou moins probable : ${results[1].label}` + ` <br/> Estimation : ${nf(results[1].confidence, 0, 2)*100}%`);
+        document.getElementById(`name2`).innerText = results[1].label ;
+        document.getElementById(`prob2`).innerText = nf(results[1].confidence, 0, 2)*100 ;
         cost = cost + nf(results[1].confidence, 0, 2)*100 ;
       } else {
-        createDiv(`Whouaf moins probable : ${results[1].label}` + ` <br/> Estimation : ${nf(results[1].confidence, 0, 2)*100}%`);
+        document.getElementById(`name5`).innerText = results[1].label ;
+        document.getElementById(`prob5`).innerText = nf(results[1].confidence, 0, 2)*100 ;
         cost2 = cost2 + nf(results[1].confidence, 0, 2)*100 ;
       }
   
       str = String(results[2].label) ;
       if (str.includes(word1)) {
-        createDiv(`Miaou trés peu probable : ${results[2].label}` + ` <br/> Estimation : ${nf(results[2].confidence, 0, 2)*100}%`);
+        document.getElementById(`name3`).innerText = results[2].label ;
+        document.getElementById(`prob3`).innerText = nf(results[2].confidence, 0, 2)*100 ;
         cost = cost + nf(results[2].confidence, 0, 2)*100 ;
       } else {
-        createDiv(`Whouaf trés peu probable : ${results[2].label}` + ` <br/> Estimation : ${nf(results[2].confidence, 0, 2)*100}%`);
+        document.getElementById(`name6`).innerText = results[2].label ;
+        document.getElementById(`prob6`).innerText = nf(results[2].confidence, 0, 2)*100 ;
         cost2 = cost2 + nf(results[2].confidence, 0, 2)*100 ;
       }
   
-      createDiv(`la probabilité que la photo soit un chat est de: <br/>` + cost + ` % `);
-      createDiv(`la probabilité que la photo soit un chien est de: <br/>` + cost2 + ` %`);
+      document.getElementById(`cost1`).innerText = cost ;
+      document.getElementById(`cost2`).innerText = cost2 ;
     }
   }
